@@ -1,0 +1,5 @@
+[flake8]
+ignore = F841, F821
+max-line-length = 83
+#exclude = */tests/*
+max-complexity = 10

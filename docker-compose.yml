@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+
+  backend:
+    build:
+      context: ./services/backend
+      dockerfile: Dockerfile
+    entrypoint: ['/usr/src/app/entrypoint.sh']
+    volumes:
+      - './services/backend:/usr/src/app'
+    ports:
+      - 5001:5000
+    environment:
+      - FLASK_ENV=development
+      - APP_SETTINGS=app.config.DevelopmentConfig
+      - PYTHONDONTWRITEBYTECODE=1
+
+  client:
+    build:
+      context: ./services/client
+      dockerfile: Dockerfile
+    stdin_open: true
+    volumes:
+      - './services/client:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - 3007:3000
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_SERVICE_URL=http://localhost:5000
+      - CHOKIDAR_USEPOLLING=true

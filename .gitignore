@@ -1,0 +1,8 @@
+__pycache__
+.pytest_cache
+env
+htmlcov
+.coverage
+node_modules
+.idea
+.DS_Store
